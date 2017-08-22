@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Exo 1</title>
+	    <link rel="stylesheet" href="css/toggles-full.css">
+	<script src="jquery-2.2.4.js"></script>
+	<script src="toggles.min.js"></script>
+
+</head>
+<body>
+	<select name="choice" id="choice">
+		<option value="Pierre">Pierre</option>
+		<option value="Papier">Papier</option>
+		<option value="Ciseaux">Ciseaux</option>
+	</select>			
+	<button id="play">Shifumi!</button>
+	<span id="output"></span>
+
+	<script type="text/javascript">
+	var totalPoints = 0;
+	var totalParties = 0;
+	$('#play').click(function(){
+		totalParties++;
+		var choices = ["Pierre", "Papier", "Ciseaux"];
+		var rand = choices[Math.floor(Math.random() * choices.length)];
+		var choice = $('#choice').val();
+		var msg1 = "Le computer a choisi " + rand;
+		var msg2 = "";
+		var result = 0;
+		if (rand == "Pierre"){
+			if (choice == "Pierre"){
+				result = 0;
+			} else if (choice == "Papier"){
+				result = 1;
+			} else if (choice == "Ciseaux"){
+				result = -1;
+			}
+		} else if (rand == "Papier"){
+			if (choice == "Pierre"){
+				result = -1;
+			} else if (choice == "Papier"){
+				result = 0;
+			} else if (choice == "Ciseaux"){
+				result = +1;
+			}
+		} else if (rand == "Ciseaux"){
+			if (choice == "Pierre"){
+				result = +1;
+			} else if (choice == "Papier"){
+				result = -1;
+			} else if (choice == "Ciseaux"){
+				result = 0;
+			}
+		}
+		switch(result){
+			case 1:
+				msg2 = "C'est gagné!";
+				totalPoints++;
+				break;
+			case -1:
+				msg2 = "C'est perdu!";
+				break;
+			case 0:
+				msg2 = "Ex aequo!";
+				break;
+		}
+		var stat = Math.floor((totalPoints/totalParties)*100);
+		$('#output').text(msg1 + ". " +  msg2 + " " + totalPoints + " parties gagnées sur " + totalParties + " soit " + stat + "%.");
+	});
+
+	</script>
+</body>
+</html>

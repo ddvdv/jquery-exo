@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Exo 2</title>
+	<script src="jquery-2.2.4.js"></script>
+</head>
+
+<body>
+	<input type="text" id="salaire" name="salaire">Salaire en EUR <br>
+	<label for="homme"><input id="homme" type="radio" name="genre">Homme <label><br>
+	<label for="femme"><input id="femme" type="radio" name="genre">Femme </label><br>
+	<input type="texte" id="enfants" name="enfants">Nombre d'enfants <br>
+
+	<button id="submit">Calculer mon revenu net</button>
+
+	<div id="output"></div>
+
+	<script type="text/javascript">
+		$('#submit').click(function(){
+			var salaire = $('#salaire').val();
+			var charges = Math.round(salaire*0.18 * 100) / 100;
+			var chargesReduc = 0;
+			var assu = Math.round(salaire*0.07 * 100) / 100;
+			var assuReduc = 0;
+			var coti = Math.round(salaire*0.05 * 100) / 100;
+			var cotiReduc = 0;
+			
+			if($('#femme:checked').length > 0){
+				chargesReduc += charges * 0.02;
+				assuReduc += assu * 0.02;
+				cotiReduc += coti * 0.02;
+			}
+
+			var nbEnfants = $('#enfants').val();
+			if (nbEnfants >= 4){
+				chargesReduc += charges * 0.02;
+				assuReduc += assu * 0.02;
+				cotiReduc += coti * 0.02;
+			} else if (nbEnfants == 3){
+				chargesReduc += charges * 0.01;
+				assuReduc += assu * 0.01;
+				cotiReduc += coti * 0.01;
+			}
+
+			var chargesTot = Math.round((charges - chargesReduc)*100 / 100);
+			var assuTot = Math.round((assu - assuReduc)*100 / 100);
+			var cotiTot = Math.round((coti - cotiReduc)*100 / 100);
+
+			var totalFrais = chargesTot + assuTot + cotiTot;
+			var sousTot = salaire - totalFrais;
+
+			var msg = "Après retenue des charges (" + chargesTot + " EUR), des assurances (" + assuTot + " EUR) et des cotisations (" + cotiTot + "EUR), il vous reste en net " + sousTot + " EUR.";
+
+			$('#output').text(msg);
+		});
+		
+		
+	</script>
+</body>
+</html>

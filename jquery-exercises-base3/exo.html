@@ -114,8 +114,12 @@
 	   		$('#rectangle5').css({ marginLeft: x + 'px'});
 		}
 
-		if (x >= bodyWidth OR x <= 0){
+		if (x > bodyWidth){
 			x = 0;
+	   		$('#rectangle5').css({ marginLeft: x + 'px'});
+		}
+		if (x < 0){
+			x = bodyWidth;
 	   		$('#rectangle5').css({ marginLeft: x + 'px'});
 		}
   	});
