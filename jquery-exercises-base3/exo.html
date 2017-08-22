@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-2.2.4.js"></script>
+</head>
+<body>
+
+	<button id="plusOne">+ 1</button>
+	<span id="counter1">0</span>
+	<br>
+	<br>
+	<button id="plus">+ 1</button>
+	<span id="counter2">0</span>
+	<button id="minus">- 1</button>
+	<br>
+	<br>
+	<input id="guess" placeholder="chiffre proposé">
+	<button id="submit">Essayer</button>
+	<span id="answer"></span>
+	<br>
+	<br>
+	<button id="plus10">Augmente de 10px</button>
+	<button id="toGreen">Devient vert</button>
+	<button id="notGreen">N'est plus vert</button>
+	<button id="dissapear">Disparait</button>
+	<button id="appear">Reapparait</button>
+	<div id="rectangle4" style="background-color: red; width: 10px; height: 10px;"></div>
+	<br>
+	<br>
+	<input id="moveIt" placeholder="Utiliser les flêches pour guider le carré">
+	<div id="rectangle5" style="background-color: yellow; width: 50px; height: 50px;"></div>
+
+</body>
+	<script>
+	
+// ## Exercice 1
+// Construisez une page html avec un bouton et un champ texte dans lequel on affiche le nombre de clics sur le bouton.
+	$('#plusOne').click(function(){
+			$('#counter1').text(parseFloat($('#counter1').text()) + 1);
+		});
+
+// ## Exercice 2
+// Construisez une page html avec un bouton "+", un bouton "-" et un champ texte dans lequel on augmente ou baisse le chiffre en fonction des boutons cliqués.
+	$('#plus').click(function(){
+			$('#counter2').text(parseFloat($('#counter2').text()) + 1);
+		});
+	$('#minus').click(function(){
+			$('#counter2').text(parseFloat($('#counter2').text()) - 1);
+		});
+
+// ## Exercice 3
+// Construisez une page html avec un bouton et un champ texte. Le but est de trouver un nombre entre 0 et 100. A chaque réponse la page répond :
+// - plus
+// - moins
+// - correct
+	var toGuess = Math.round((Math.random()*100));
+	$('#submit').click(function(){
+		var tried = parseFloat($('#guess').val());
+		if (tried == toGuess){
+			$('#answer').text('Spot on!');
+		} else if (tried < toGuess){
+			$('#answer').text('trop petit');
+		} else if (tried > toGuess){
+			$('#answer').text('trop grand');	
+		}
+	})
+
+
+// Quand la réponse est trouvée, on obtient le nombre d'essai que l'on a fait.
+
+// ## Exercice 4
+// Construisez une page html avec 5 boutons et un rectangle. Chaque bouton provoque une action sur le rectangle.
+// - Bouton 1 : augmente la hauteur de 10px, si il dépasse 100px, il remet la hauteur à 10px
+	$('#plus10').click(function(){
+		$('#rectangle4').width($('#rectangle4').width() + 10);
+		if ($('#rectangle4').width() > 100){
+			$('#rectangle4').width(10);
+		}
+	});
+
+// - Bouton 2 : met le rectangle en vert
+	$('#toGreen').click(function(){
+		$('#rectangle4').css('background-color', 'green');
+		}
+	);
+// - Bouton 3 : remet les couleurs initiales
+	$('#notGreen').click(function(){
+		$('#rectangle4').css('background-color', 'red');
+		}
+	);
+// - Bouton 4 : fait disparaître le rectangle
+	$('#dissapear').click(function(){
+		$('#rectangle4').hide(); }
+	);
+// - Bouton 5 : fait réaparaître le rectangle
+	$('#appear').click(function(){
+		$('#rectangle4').show(); }
+	);
+
+// ## Exercice 5
+// Construisez une page html avec un carré et un champ de saisie de texte dans un formulaire.
+// Lorsque l'on appuie sur une touche de direction le carré se déplace de 10 px dans la bonne direction.  
+// BONUS : Quand le bloc atteint un bord de la page, il doit réaparaître de l'autre côté.
+	var x = 0;
+	var bodyWidth = $('body').width();
+	$('#moveIt').keydown(function( event ) {
+	  	if ( event.which == 39 ) {
+	  		x += 10;
+	   		$('#rectangle5').css({ marginLeft: x + 'px'});
+		} else if ( event.which == 37 ) {
+	  		x -= 10;
+	   		$('#rectangle5').css({ marginLeft: x + 'px'});
+		}
+
+		if (x >= bodyWidth OR x <= 0){
+			x = 0;
+	   		$('#rectangle5').css({ marginLeft: x + 'px'});
+		}
+  	});
+
+	</script>
+</html>
