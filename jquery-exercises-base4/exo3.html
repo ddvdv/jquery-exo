@@ -14,19 +14,28 @@
 	<span id="output"></span>
 
 	<script type="text/javascript">
-		var nomReg = "";
-		var prenomReg = "";
-		var emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		var telephoneReg = '/[0-9 -()+]+$/g';
+		var prenomEtNomReg = /^[\w-]+$/;
+		var emailReg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+		var telephoneReg = /[0-9]+$/g;
 
 		$('#submit').click(function(){
-			console.log($('#email').val().match(emailReg));
-			console.log($('#telephone').val().match(telephoneReg));
-
-			$('#nom').val($('#nom').val().match(nomReg));
-			$('#prenom').val($('#prenom').val().match(nomReg));
-			$('#email').val($('#email').val().match(emailReg));
-			$('#telephone').val($('#telephone').val().match(telephoneReg));
+			var msg = "";
+			if(!prenomEtNomReg.test($('#nom').val())){
+				msg = ('Veuillez entrez un nom valide (lettres ou tirets)');
+			} else {
+				if(!prenomEtNomReg.test($('#prenom').val())){
+					msg = ('Veuillez entrez un prénom valide (lettres ou tirets)');
+				} else {
+					if(!emailReg.test($('#email').val())){
+						msg = ('Veuillez entrez un email valide');
+					} else {
+						if(!telephoneReg.test($('#telephone').val())){
+						msg = ('Veuillez entrez un téléphone valide (seulement chiffres)');
+						}
+					}
+				}
+			}
+			$('#output').text(msg);
 		});
 
 
