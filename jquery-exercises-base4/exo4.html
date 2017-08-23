@@ -6,8 +6,29 @@
 	<script src="jquery-2.2.4.js"></script>
 </head>
 <body>
+	<input type="text" id="name">Nom <br>
+	<input type="text" id="surname">Prénom<br>
+	<input type="text" id="dateOB">Date de naissance<br>
+	<input type="text" id="placeOB">Lieu de naissance<br>
+	<input type="text" id="job">Job<br>
+	<input type="text" id="company">Société<br>
+	<button id="submit">Me présenter</button>
+	<br>
+	<span id="output"></span>
 	
 	<script type="text/javascript">
+		$('#submit').click(function(){
+			var name = $('#name').val();
+			var surname = $('#surname').val();
+			var dateOB = $('#dateOB').val();
+			var placeOB = $('#placeOB').val();
+			var job = $('#job').val();
+			var company = $('#company').val();
+
+			var msg = surname + " " + name + ", né le " +dateOB + " à " + placeOB + ". Actuellement " + job + " à " + company + ".";
+
+			$('#output').text(msg);
+		});
 		
 		
 	</script>
