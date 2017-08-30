@@ -107,8 +107,8 @@
 	var bodyWidth = $('body').width();
 	$('#moveIt').keydown(function( event ) {
 	  	if ( event.which == 39 ) {
-	  		x += 10;
-	   		$('#rectangle5').css({ marginLeft: x + 'px'});
+	  		// x += 10;
+	   		$('#rectangle5').css({ marginLeft: (x+10) + 'px'});
 		} else if ( event.which == 37 ) {
 	  		x -= 10;
 	   		$('#rectangle5').css({ marginLeft: x + 'px'});
